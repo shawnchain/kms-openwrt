@@ -1,38 +1,29 @@
-msgid ""
-msgstr "Content-Type: text/plain; charset=UTF-8"
+msgid "KMS Server"
+msgstr "KMS 服务器"
 
-msgid "Address family"
-msgstr "地址类型"
+msgid "Basic Setting"
+msgstr "基本设置"
 
-msgid "-- All --"
-msgstr "-- 全部 --"
+msgid "Config File"
+msgstr "配置文件"
+
+msgid "A KMS Server Emulator to active your Windows or Office"
+msgstr "KMS服务器可用于激活Windows或Office"
+
+msgid "RUNNING"
+msgstr "运行中"
+
+msgid "NOT RUNNING"
+msgstr "未运行"
+
+msgid "Collecting data..."
+msgstr "收集数据..."
 
 msgid "Enable"
 msgstr "启用"
 
-msgid "Global Setting"
-msgstr "全局设置"
+msgid "Auto activate"
+msgstr "自动激活局域网客户端"
 
-msgid "Interface"
-msgstr "网络接口"
-
-msgid "IPv4 and IPv6"
-msgstr "IPv4 和 IPv6"
-
-msgid "IPv4 only"
-msgstr "只有 IPv4"
-
-msgid "IPv6 only"
-msgstr "只有 IPv6"
-
-msgid "Listen only on the given interface or, if unchoose, on all"
-msgstr "只监听指定网络接口，如果全部不选则监听所有地址"
-
-msgid "Options"
-msgstr "参数设置"
-
-msgid "Port"
-msgstr "端口"
-
-msgid "Vlmcsd Setting"
-msgstr "Vlmcsd 设置"
+msgid "This file is /etc/vlmcsd/vlmcsd.ini."
+msgstr "这个文件在 /etc/vlmcsd/vlmcsd.ini 下，可以增加新的产品主密钥。"
