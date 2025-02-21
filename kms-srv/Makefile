@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=kms-srv
 PKG_VERSION:=20250101
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_MAINTAINER:=Anonymous
 PKG_LICENSE:=MIT
@@ -29,13 +29,13 @@ include $(INCLUDE_DIR)/package.mk
 define Package/kms-srv
 	SECTION:=net
 	CATEGORY:=Network
-	TITLE:=vlmcsd for OpenWRT
+	TITLE:=kmsd for OpenWRT
 	URL:=http://github.com/
 	DEPENDS:=+libpthread
 endef
 
 define Package/kms-srv/description
-	vlmcsd is a KMS Emulator in C.
+	kmsd is a KMS Emulator in C.
 endef
 
 define Package/kms-srv/postrm
@@ -44,7 +44,7 @@ define Package/kms-srv/postrm
 
 remove_srvhost() {
     local section=$1
-    [ "${section%%_*}" = "vlmcsd" ] && uci_remove dhcp "$section"
+    [ "${section%%_*}" = "kmsd" ] && uci_remove dhcp "$section"
 }
 
 config_load dhcp
@@ -56,17 +56,17 @@ endef
 
 define Package/kms-srv/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/vlmcs $(1)/usr/bin/vlmcs
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/vlmcsd $(1)/usr/bin/vlmcsd
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/vlmcs $(1)/usr/bin/kmsc
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/vlmcsd $(1)/usr/bin/kmsd
 
 	$(INSTALL_DIR) $(1)/etc
-	$(INSTALL_CONF) ./files/etc/vlmcsd.ini $(1)/etc/vlmcsd.ini
+	$(INSTALL_CONF) ./files/etc/kms/kmsd.ini $(1)/etc/kmsd.ini
 
 	$(INSTALL_DIR) $(1)/etc/config
-	$(INSTALL_CONF) ./files/etc/config/vlmcsd $(1)/etc/config/vlmcsd
+	$(INSTALL_CONF) ./files/etc/config/kmsd $(1)/etc/config/kmsd
 
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/etc/init.d/vlmcsd $(1)/etc/init.d/vlmcsd
+	$(INSTALL_BIN) ./files/etc/init.d/kmsd $(1)/etc/init.d/kmsd
 endef
 
 $(eval $(call BuildPackage,kms-srv))

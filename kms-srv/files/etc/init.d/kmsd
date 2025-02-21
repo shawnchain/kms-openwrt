@@ -4,8 +4,8 @@
 START=99
 USE_PROCD=1
 
-PROG=/usr/bin/vlmcsd
-CONF=vlmcsd
+PROG=/usr/bin/kmsd
+CONF=kmsd
 
 . /lib/functions/network.sh
 
@@ -40,17 +40,17 @@ listen_all() {
 
 remove_srvhost() {
     local section=$1
-    [ "${section%%_*}" = "vlmcsd" ] && uci_remove dhcp "$section"
+    [ "${section%%_*}" = "kmsd" ] && uci_remove dhcp "$section"
 }
 
 add_srvhost() {
-    local host="$1" port="$2" section="vlmcsd_$3"
+    local host="$1" port="$2" section="kmsd_$3"
 
     uci -q batch <<EOF
         set dhcp.$section='srvhost'
         set dhcp.$section.class='0'
         set dhcp.$section.weight='0'
-        set dhcp.$section.srv="_vlmcs._tcp"
+        set dhcp.$section.srv="_kms._tcp"
         set dhcp.$section.target="$host"
         set dhcp.$section.port="$port"
 EOF
@@ -61,8 +61,8 @@ dnsmasq_reload() {
     local hostname=$(uci -q get system.@system[0].hostname)
     local seq=1
 
-    config_get port vlmcsd Port
-    config_get listen vlmcsd Listen
+    config_get port kmsd Port
+    config_get listen kmsd Listen
     config_get ifaces global Interface
 
     config_load dhcp
@@ -108,7 +108,7 @@ dnsmasq_reload() {
 }
 
 start_service() {
-    local inifile=/var/etc/vlmcsd.ini
+    local inifile=/etc/kms/kmsd.ini
     local value family
 
     config_load $CONF
@@ -119,10 +119,10 @@ start_service() {
     
     echo -n > $inifile
     config_get family global family
-    config_get value vlmcsd Port
+    config_get value kmsd Port
     [ -n "$value" ] && echo "Port = $value" >> $inifile
     
-    config_get value vlmcsd Listen
+    config_get value kmsd Listen
     if [ -n "$value" ];then
         append_listen $value
     else
@@ -130,53 +130,53 @@ start_service() {
         [ -n "$value" ] && parse_iface $value || listen_all
     fi
     
-    config_get value vlmcsd PublicIPProtectionLevel
+    config_get value kmsd PublicIPProtectionLevel
     [ -n "$value" ] && echo "PublicIPProtectionLevel = $value" >> $inifile
-    config_get_bool value vlmcsd FreeBind
+    config_get_bool value kmsd FreeBind
     [ "$value" = "1" ] && echo "FreeBind = true" >> $inifile
-    config_get value vlmcsd RandomizationLevel
+    config_get value kmsd RandomizationLevel
     [ -n "$value" ] && echo "RandomizationLevel = $value" >> $inifile
-    config_get value vlmcsd HostBuild
+    config_get value kmsd HostBuild
     [ -n "$value" ] && echo "HostBuild = $value" >> $inifile
-    config_get value vlmcsd LCID
+    config_get value kmsd LCID
     [ -n "$value" ] && echo "LCID = $value" >> $inifile
-    config_get value vlmcsd MaxWorkers
+    config_get value kmsd MaxWorkers
     [ -n "$value" ] && echo "MaxWorkers = $value" >> $inifile
-    config_get value vlmcsd ConnectionTimeout
+    config_get value kmsd ConnectionTimeout
     [ -n "$value" ] && echo "ConnectionTimeout = $value" >> $inifile
-    config_get_bool value vlmcsd DisconnectClientsImmediately
+    config_get_bool value kmsd DisconnectClientsImmediately
     [ "$value" = "1" ] && echo "DisconnectClientsImmediately = yes" >> $inifile
-    config_get value vlmcsd PidFile
+    config_get value kmsd PidFile
     [ -n "$value" ] && echo "PidFile = $value" >> $inifile
-    config_get value vlmcsd KmsData
+    config_get value kmsd KmsData
     [ -n "$value" ] && echo "KmsData = $value" >> $inifile
-    config_get value vlmcsd LogFile
+    config_get value kmsd LogFile
     [ -n "$value" ] && echo "LogFile = $value" >> $inifile
-    config_get_bool value vlmcsd LogDateAndTime
+    config_get_bool value kmsd LogDateAndTime
     [ "$value" = "0" ] && echo "LogDateAndTime = false" >> $inifile
-    config_get_bool value vlmcsd LogVerbose
+    config_get_bool value kmsd LogVerbose
     [ "$value" = "1" ] && echo "LogVerbose = true" >> $inifile
-    config_get value vlmcsd WhiteListingLevel
+    config_get value kmsd WhiteListingLevel
     [ -n "$value" ] && echo "WhiteListingLevel = $value" >> $inifile
-    config_get_bool value vlmcsd CheckClientTime
+    config_get_bool value kmsd CheckClientTime
     [ "$value" = "1" ] && echo "CheckClientTime = true" >> $inifile
-    config_get_bool value vlmcsd MaintainClients
+    config_get_bool value kmsd MaintainClients
     [ "$value" = "1" ] && echo "MaintainClients = true" >> $inifile
-    config_get_bool value vlmcsd StartEmpty
+    config_get_bool value kmsd StartEmpty
     [ "$value" = "1" ] && echo "StartEmpty = true" >> $inifile
-    config_get value vlmcsd ActivationInterval
+    config_get value kmsd ActivationInterval
     [ -n "$value" ] && echo "ActivationInterval = $value" >> $inifile
-    config_get value vlmcsd RenewalInterval
+    config_get value kmsd RenewalInterval
     [ -n "$value" ] && echo "RenewalInterval = $value" >> $inifile
-    config_get value vlmcsd ExitLevel
+    config_get value kmsd ExitLevel
     [ -n "$value" ] && echo "ExitLevel = $value" >> $inifile
-    config_get value vlmcsd user
+    config_get value kmsd user
     [ -n "$value" ] && echo "group = $value" >> $inifile
-    config_get value vlmcsd user
+    config_get value kmsd user
     [ -n "$value" ] && echo "group = $value" >> $inifile
-    config_get_bool value vlmcsd UseNDR64
+    config_get_bool value kmsd UseNDR64
     [ "$value" = "0" ] && echo "UseNDR64 = false" >> $inifile
-    config_get_bool value vlmcsd UseBTFN
+    config_get_bool value kmsd UseBTFN
     [ "$value" = "0" ] && echo "UseBTFN = false" >> $inifile
 
     procd_open_instance
@@ -189,5 +189,5 @@ start_service() {
 }
 
 service_triggers() {
-	procd_add_reload_trigger "vlmcsd" "dhcp" "system"
+	procd_add_reload_trigger "kmsd" "dhcp" "system"
 }
