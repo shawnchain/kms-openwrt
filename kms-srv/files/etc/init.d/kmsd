@@ -108,7 +108,7 @@ dnsmasq_reload() {
 }
 
 start_service() {
-    local inifile=/etc/kms/kmsd.ini
+    local inifile=/etc/kms/kmsd.ini.gen
     local value family
 
     config_load $CONF
@@ -116,8 +116,9 @@ start_service() {
     [ "$value" = "0" ] && return 0
 
     mkdir -p $(dirname $inifile)
-    
     echo -n > $inifile
+    [ -n /etc/kms/kmsd.ini ] && cat /etc/kms/kmsd.ini >> $inifile
+
     config_get family global family
     config_get value kmsd Port
     [ -n "$value" ] && echo "Port = $value" >> $inifile
