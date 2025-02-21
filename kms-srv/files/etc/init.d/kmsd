@@ -121,66 +121,66 @@ start_service() {
 
     [ -n /etc/kms/kmsd.ini ] && cat /etc/kms/kmsd.ini >> $inifile ||:
 
-    config_get family global family
-    config_get value kmsd Port
-    [ -n "$value" ] && echo "Port = $value" >> $inifile
+    # config_get family global family
+    # config_get value kmsd Port
+    # [ -n "$value" ] && echo "Port = $value" >> $inifile
     
-    config_get value kmsd Listen
-    if [ -n "$value" ];then
-        append_listen $value
-    else
-        config_get value global Interface
-        [ -n "$value" ] && parse_iface $value || listen_all
-    fi
+    # config_get value kmsd Listen
+    # if [ -n "$value" ];then
+    #     append_listen $value
+    # else
+    #     config_get value global Interface
+    #     [ -n "$value" ] && parse_iface $value || listen_all
+    # fi
     
-    config_get value kmsd PublicIPProtectionLevel
-    [ -n "$value" ] && echo "PublicIPProtectionLevel = $value" >> $inifile
-    config_get_bool value kmsd FreeBind
-    [ "$value" = "1" ] && echo "FreeBind = true" >> $inifile
-    config_get value kmsd RandomizationLevel
-    [ -n "$value" ] && echo "RandomizationLevel = $value" >> $inifile
-    config_get value kmsd HostBuild
-    [ -n "$value" ] && echo "HostBuild = $value" >> $inifile
-    config_get value kmsd LCID
-    [ -n "$value" ] && echo "LCID = $value" >> $inifile
-    config_get value kmsd MaxWorkers
-    [ -n "$value" ] && echo "MaxWorkers = $value" >> $inifile
-    config_get value kmsd ConnectionTimeout
-    [ -n "$value" ] && echo "ConnectionTimeout = $value" >> $inifile
-    config_get_bool value kmsd DisconnectClientsImmediately
-    [ "$value" = "1" ] && echo "DisconnectClientsImmediately = yes" >> $inifile
-    config_get value kmsd PidFile
-    [ -n "$value" ] && echo "PidFile = $value" >> $inifile
-    config_get value kmsd KmsData
-    [ -n "$value" ] && echo "KmsData = $value" >> $inifile
-    config_get value kmsd LogFile
-    [ -n "$value" ] && echo "LogFile = $value" >> $inifile
-    config_get_bool value kmsd LogDateAndTime
-    [ "$value" = "0" ] && echo "LogDateAndTime = false" >> $inifile
-    config_get_bool value kmsd LogVerbose
-    [ "$value" = "1" ] && echo "LogVerbose = true" >> $inifile
-    config_get value kmsd WhiteListingLevel
-    [ -n "$value" ] && echo "WhiteListingLevel = $value" >> $inifile
-    config_get_bool value kmsd CheckClientTime
-    [ "$value" = "1" ] && echo "CheckClientTime = true" >> $inifile
-    config_get_bool value kmsd MaintainClients
-    [ "$value" = "1" ] && echo "MaintainClients = true" >> $inifile
-    config_get_bool value kmsd StartEmpty
-    [ "$value" = "1" ] && echo "StartEmpty = true" >> $inifile
-    config_get value kmsd ActivationInterval
-    [ -n "$value" ] && echo "ActivationInterval = $value" >> $inifile
-    config_get value kmsd RenewalInterval
-    [ -n "$value" ] && echo "RenewalInterval = $value" >> $inifile
-    config_get value kmsd ExitLevel
-    [ -n "$value" ] && echo "ExitLevel = $value" >> $inifile
-    config_get value kmsd user
-    [ -n "$value" ] && echo "group = $value" >> $inifile
-    config_get value kmsd user
-    [ -n "$value" ] && echo "group = $value" >> $inifile
-    config_get_bool value kmsd UseNDR64
-    [ "$value" = "0" ] && echo "UseNDR64 = false" >> $inifile
-    config_get_bool value kmsd UseBTFN
-    [ "$value" = "0" ] && echo "UseBTFN = false" >> $inifile
+    # config_get value kmsd PublicIPProtectionLevel
+    # [ -n "$value" ] && echo "PublicIPProtectionLevel = $value" >> $inifile
+    # config_get_bool value kmsd FreeBind
+    # [ "$value" = "1" ] && echo "FreeBind = true" >> $inifile
+    # config_get value kmsd RandomizationLevel
+    # [ -n "$value" ] && echo "RandomizationLevel = $value" >> $inifile
+    # config_get value kmsd HostBuild
+    # [ -n "$value" ] && echo "HostBuild = $value" >> $inifile
+    # config_get value kmsd LCID
+    # [ -n "$value" ] && echo "LCID = $value" >> $inifile
+    # config_get value kmsd MaxWorkers
+    # [ -n "$value" ] && echo "MaxWorkers = $value" >> $inifile
+    # config_get value kmsd ConnectionTimeout
+    # [ -n "$value" ] && echo "ConnectionTimeout = $value" >> $inifile
+    # config_get_bool value kmsd DisconnectClientsImmediately
+    # [ "$value" = "1" ] && echo "DisconnectClientsImmediately = yes" >> $inifile
+    # config_get value kmsd PidFile
+    # [ -n "$value" ] && echo "PidFile = $value" >> $inifile
+    # config_get value kmsd KmsData
+    # [ -n "$value" ] && echo "KmsData = $value" >> $inifile
+    # config_get value kmsd LogFile
+    # [ -n "$value" ] && echo "LogFile = $value" >> $inifile
+    # config_get_bool value kmsd LogDateAndTime
+    # [ "$value" = "0" ] && echo "LogDateAndTime = false" >> $inifile
+    # config_get_bool value kmsd LogVerbose
+    # [ "$value" = "1" ] && echo "LogVerbose = true" >> $inifile
+    # config_get value kmsd WhiteListingLevel
+    # [ -n "$value" ] && echo "WhiteListingLevel = $value" >> $inifile
+    # config_get_bool value kmsd CheckClientTime
+    # [ "$value" = "1" ] && echo "CheckClientTime = true" >> $inifile
+    # config_get_bool value kmsd MaintainClients
+    # [ "$value" = "1" ] && echo "MaintainClients = true" >> $inifile
+    # config_get_bool value kmsd StartEmpty
+    # [ "$value" = "1" ] && echo "StartEmpty = true" >> $inifile
+    # config_get value kmsd ActivationInterval
+    # [ -n "$value" ] && echo "ActivationInterval = $value" >> $inifile
+    # config_get value kmsd RenewalInterval
+    # [ -n "$value" ] && echo "RenewalInterval = $value" >> $inifile
+    # config_get value kmsd ExitLevel
+    # [ -n "$value" ] && echo "ExitLevel = $value" >> $inifile
+    # config_get value kmsd user
+    # [ -n "$value" ] && echo "group = $value" >> $inifile
+    # config_get value kmsd user
+    # [ -n "$value" ] && echo "group = $value" >> $inifile
+    # config_get_bool value kmsd UseNDR64
+    # [ "$value" = "0" ] && echo "UseNDR64 = false" >> $inifile
+    # config_get_bool value kmsd UseBTFN
+    # [ "$value" = "0" ] && echo "UseBTFN = false" >> $inifile
 
     procd_open_instance
     procd_set_param command $PROG -D -i $inifile
