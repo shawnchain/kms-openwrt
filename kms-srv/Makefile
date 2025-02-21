@@ -60,13 +60,13 @@ define Package/kms-srv/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/vlmcsd $(1)/usr/bin/vlmcsd
 
 	$(INSTALL_DIR) $(1)/etc
-	$(INSTALL_CONF) ./files/root/etc/vlmcsd.ini $(1)/etc/vlmcsd.ini
+	$(INSTALL_CONF) ./files/etc/vlmcsd.ini $(1)/etc/vlmcsd.ini
 
 	$(INSTALL_DIR) $(1)/etc/config
-	$(INSTALL_CONF) ./files/root/etc/config/vlmcsd $(1)/etc/config/vlmcsd
+	$(INSTALL_CONF) ./files/etc/config/vlmcsd $(1)/etc/config/vlmcsd
 
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/root/etc/init.d/vlmcsd $(1)/etc/init.d/vlmcsd
+	$(INSTALL_BIN) ./files/etc/init.d/vlmcsd $(1)/etc/init.d/vlmcsd
 endef
 
 $(eval $(call BuildPackage,kms-srv))
