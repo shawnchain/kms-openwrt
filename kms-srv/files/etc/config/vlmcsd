@@ -3,3 +3,7 @@ config global 'global'
     option enable '1'
 
 config options 'vlmcsd'
+
+config vlmcsd 'config'
+	option autoactivate '1'
+	option enabled '1'
