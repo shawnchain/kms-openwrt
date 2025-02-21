@@ -50,7 +50,7 @@ add_srvhost() {
         set dhcp.$section='srvhost'
         set dhcp.$section.class='0'
         set dhcp.$section.weight='0'
-        set dhcp.$section.srv="_kms._tcp"
+        set dhcp.$section.srv="_vlmcs._tcp"
         set dhcp.$section.target="$host"
         set dhcp.$section.port="$port"
 EOF
