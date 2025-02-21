@@ -115,9 +115,10 @@ start_service() {
     config_get_bool value global enable
     [ "$value" = "0" ] && return 0
 
+    echo "generating kmsd.ini file"
     mkdir -p $(dirname $inifile)
     echo -n > $inifile
-    echo "# auto generated kmsd.ini file"
+    echo "# auto generated kmsd.ini file" > $inifile
 
     [ -n /etc/kms/kmsd.ini ] && cat /etc/kms/kmsd.ini >> $inifile ||:
 
