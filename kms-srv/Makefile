@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=kms-srv
-PKG_VERSION:=20250101
+PKG_VERSION:=20250102
 PKG_RELEASE:=1
 
 PKG_MAINTAINER:=Anonymous
