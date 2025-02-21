@@ -2,8 +2,8 @@
 config global 'global'
     option enable '1'
 
-config options 'vlmcsd'
+config options 'kmsd'
 
-config vlmcsd 'config'
+config kmsd 'config'
 	option autoactivate '1'
 	option enabled '1'

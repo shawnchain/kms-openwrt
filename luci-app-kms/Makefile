@@ -42,7 +42,7 @@ define Package/luci-app-kms/install
 	cp -pR ./luasrc/* $(1)/usr/lib/lua/luci
 
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
-	po2lmo ./po/zh-cn/vlmcsd.po $(1)/usr/lib/lua/luci/i18n/vlmcsd.zh-cn.lmo
+	po2lmo ./po/zh-cn/kmsd.po $(1)/usr/lib/lua/luci/i18n/kmsd.zh-cn.lmo
 
 #	$(INSTALL_DIR) $(1)/
 #	cp -pR ./root/* $(1)/
