@@ -30,10 +30,10 @@ define Package/vlmcsd/description
   vlmcsd is a KMS Emulator in C.
 endef
 
-define Build/Prepare
-	$(call Build/Prepare/Default)
-	rm $(PKG_BUILD_DIR)/GNUmakefile
-endef
+# define Build/Prepare
+# 	$(call Build/Prepare/Default)
+# 	rm $(PKG_BUILD_DIR)/GNUmakefile
+# endef
 
 define Package/vlmcsd/install
 	$(INSTALL_DIR) $(1)/usr/bin
