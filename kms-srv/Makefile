@@ -60,7 +60,7 @@ define Package/kms-srv/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/vlmcsd $(1)/usr/bin/kmsd
 
 	$(INSTALL_DIR) $(1)/etc
-	$(INSTALL_CONF) ./files/etc/kms/kmsd.ini $(1)/etc/kmsd.ini
+	$(INSTALL_CONF) ./files/etc/kms/kmsd.ini $(1)/etc/kms/kmsd.ini
 
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_CONF) ./files/etc/config/kmsd $(1)/etc/config/kmsd
