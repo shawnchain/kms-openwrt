@@ -1,15 +1,8 @@
-#
-# Copyright (C) 2019 Tony Feng <fengtons@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v3.
-# See /LICENSE for more information.
-#
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=vlmcsd
 PKG_VERSION:=20250101
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_MAINTAINER:=anonymous <anonymous@gmail.com>
 PKG_LICENSE:=SHIT
@@ -27,42 +20,26 @@ PKG_BUILD_PARALLEL:=1
 include $(INCLUDE_DIR)/package.mk
 
 define Package/vlmcsd
-	SECTION:=net
-	CATEGORY:=Network
-	TITLE:=vlmcsd for OpenWRT
-	URL:=http://github.com/
-	DEPENDS:=+libpthread
+  SECTION:=net
+  CATEGORY:=Network
+  TITLE:=vlmcsd for OpenWRT
+  DEPENDS:=+libpthread
 endef
 
 define Package/vlmcsd/description
-	vlmcsd is a KMS Emulator in C.
+  vlmcsd is a KMS Emulator in C.
 endef
 
-define Package/vlmcsd/postrm
-#!/bin/sh
-. /lib/functions.sh
-
-remove_srvhost() {
-    local section=$1
-    [ "${section%%_*}" = "vlmcsd" ] && uci_remove dhcp "$section"
-}
-
-config_load dhcp
-config_foreach remove_srvhost srvhost
-uci_commit dhcp
-/etc/init.d/dnsmasq reload
-exit 0
+define Build/Prepare
+	$(call Build/Prepare/Default)
+	rm $(PKG_BUILD_DIR)/GNUmakefile
 endef
 
 define Package/vlmcsd/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/vlmcs $(1)/usr/bin/vlmcs
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/vlmcsd $(1)/usr/bin/vlmcsd
-
-	$(INSTALL_DIR) $(1)/etc/config
-	$(INSTALL_CONF) ./files/vlmcsd.conf $(1)/etc/config/vlmcsd
-	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/vlmcsd.init $(1)/etc/init.d/vlmcsd
+	$(INSTALL_DIR) $(1)/etc/vlmcsd
+	$(INSTALL_BIN) ./files/vlmcsd.ini $(1)/etc/vlmcsd/vlmcsd.ini
 endef
 
 $(eval $(call BuildPackage,vlmcsd))
