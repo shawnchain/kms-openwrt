@@ -7,9 +7,9 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=vlmcsd
+PKG_NAME:=kms-srv
 PKG_VERSION:=20250101
-PKG_RELEASE:=2
+PKG_RELEASE:=1
 
 PKG_MAINTAINER:=Anonymous
 PKG_LICENSE:=MIT
@@ -26,7 +26,7 @@ PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/vlmcsd
+define Package/kms-srv
 	SECTION:=net
 	CATEGORY:=Network
 	TITLE:=vlmcsd for OpenWRT
@@ -34,11 +34,11 @@ define Package/vlmcsd
 	DEPENDS:=+libpthread
 endef
 
-define Package/vlmcsd/description
+define Package/kms-srv/description
 	vlmcsd is a KMS Emulator in C.
 endef
 
-define Package/vlmcsd/postrm
+define Package/kms-srv/postrm
 #!/bin/sh
 . /lib/functions.sh
 
@@ -54,7 +54,7 @@ uci_commit dhcp
 exit 0
 endef
 
-define Package/vlmcsd/install
+define Package/kms-srv/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/vlmcs $(1)/usr/bin/vlmcs
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/vlmcsd $(1)/usr/bin/vlmcsd
@@ -69,4 +69,4 @@ define Package/vlmcsd/install
 	$(INSTALL_BIN) ./files/root/etc/init.d/vlmcsd $(1)/etc/init.d/vlmcsd
 endef
 
-$(eval $(call BuildPackage,vlmcsd))
+$(eval $(call BuildPackage,kms-srv))
